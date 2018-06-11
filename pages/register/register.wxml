@@ -1,0 +1,10 @@
+<!--pages/register.wxml-->
+<view class="container">
+  <view class="register_section">
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+          <input name="username" maxlength="30" type="text" placeholder="姓名/Name" />
+          <input name="username" maxlength="11" type="text" placeholder="手机号/Phone" />
+          <input name="username" maxlength="30" type="text" placeholder="学校/School" />
+          <button bindtap="registerUser">Join FilMarathon</button>
+  </view>
+</view>
