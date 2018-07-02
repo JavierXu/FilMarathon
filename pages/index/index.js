@@ -29,6 +29,17 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true,
         })
+        try {
+          var value = wx.getStorageSync('registered')
+          if (!value) {
+            console.log(value)
+            wx.navigateTo({
+              url: '../register/register',
+            })
+          }
+        } catch (e) {
+          console.log(e)
+        }
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
@@ -39,6 +50,17 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true,
           })
+          try {
+            var value = wx.getStorageSync('registered')
+            if (!value) {
+              console.log(value)
+              wx.navigateTo({
+                url: '../register/register',
+              })
+            }
+          } catch (e) {
+            console.log(e)
+          }
         }
       })
     }
@@ -50,9 +72,17 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
     })
-    // Navigate to Register Page
-    wx.navigateTo({
-      url: '../register/register'
-    })
+    // TODO: If not regeistered, navigate to register page
+    try {
+      var value = wx.getStorageSync('registered')
+      if (!value) {
+        console.log(value)
+        wx.navigateTo({
+          url: '../register/register',
+        })
+      }
+    } catch (e) {
+      console.log(e)
+    }
   }
 })

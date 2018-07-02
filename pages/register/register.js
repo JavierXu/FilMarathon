@@ -23,6 +23,7 @@ Page({
 
   registerUser: function(e) {
     console.log(e)
+    wx.setStorageSync('registered', true)
   },
 
   /**
