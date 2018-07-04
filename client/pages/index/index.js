@@ -12,7 +12,7 @@ Page({
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
-      url: '../register/register'
+      url: '../playground/playground'
     })
   },
   onLoad: function () {
@@ -32,9 +32,13 @@ Page({
         try {
           var value = wx.getStorageSync('registered')
           if (!value) {
-            console.log(value)
             wx.navigateTo({
               url: '../register/register',
+            })
+          }
+          else {
+            wx.navigateTo({
+              url: '../playground/playground',
             })
           }
         } catch (e) {
@@ -53,9 +57,13 @@ Page({
           try {
             var value = wx.getStorageSync('registered')
             if (!value) {
-              console.log(value)
               wx.navigateTo({
                 url: '../register/register',
+              })
+            }
+            else {
+              wx.navigateTo({
+                url: '../playground/playground',
               })
             }
           } catch (e) {
@@ -76,9 +84,13 @@ Page({
     try {
       var value = wx.getStorageSync('registered')
       if (!value) {
-        console.log(value)
         wx.navigateTo({
           url: '../register/register',
+        })
+      }
+      else {
+        wx.navigateTo({
+          url: '../playground/playground',
         })
       }
     } catch (e) {

@@ -1,0 +1,9 @@
+<!--pages/playground.wxml-->
+<view class="container">
+  <view class="user" wx:for="{{user}}">
+    <text>{{item.name}}\n</text>
+    <text>{{item.school}}\n</text>
+    <text>{{item.skill}}\n</text>
+    <text>{{item.introduction}}\n</text>    
+  </view>
+</view>

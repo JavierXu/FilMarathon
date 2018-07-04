@@ -7,14 +7,20 @@
   border-radius: 50%;
 }
 
-.register_section {
+.register-section {
   display: flex;
   flex-direction: column;
 }
 
-.register_section input {
-  margin: 15px;
+ .form-section {
+   margin-top: 5px;
+   margin-bottom: 15px;
+ }
+
+.register-section image, text, input, textarea {
+  margin: 10px;
 }
+
 
 .register_section button {
   margin-top: 100px;

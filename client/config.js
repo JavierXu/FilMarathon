@@ -7,6 +7,10 @@ var host = 'https://ev0o1srm.qcloud.la';
 
 var config = {
 
+  appId: 'wxb150fb1266bae15b',
+
+  appSecret: '0919cd49bd595536bf6d05cef99a696f',
+
     // 下面的地址配合云端 Demo 工作
     service: {
         host,
@@ -21,7 +25,13 @@ var config = {
         tunnelUrl: `${host}/weapp/tunnel`,
 
         // 上传图片接口
-        uploadUrl: `${host}/weapp/upload`
+        uploadUrl: `${host}/weapp/upload`,
+
+        // 注册用户
+        addUserUrl: `${host}/weapp/addUser`,
+
+        getAlluserUrl: `${host}/weapp/getAlluser`,
+        
     }
 };
 

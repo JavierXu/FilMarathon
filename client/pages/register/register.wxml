@@ -1,10 +1,33 @@
 <!--pages/register.wxml-->
 <view class="container">
-  <view class="register_section">
-          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-          <input name="username" maxlength="30" type="text" placeholder="姓名/Name" />
-          <input name="username" maxlength="11" type="text" placeholder="手机号/Phone" />
-          <input name="username" maxlength="30" type="text" placeholder="学校/School" />
-          <button bindtap="registerUser">Join FilMarathon</button>
-  </view>
+<form bindsubmit="registerUser">
+    <view class="register-section">
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+            <view class="form-section">
+              <text>姓名</text>
+              <input name="username" maxlength="30" type="text" placeholder="Name" bindinput="getName"/>
+            </view>
+            <view class="form-section">
+              <text>邮箱</text>            
+            <input name="email" maxlength="30" type="text" placeholder="Email" bindinput="getEmail"/>
+            </view>
+            <view class="form-section">
+              <text>微信号</text>            
+            <input name="wechatid" maxlength="30" type="text" placeholder="Wechat_ID" bindinput="getWechatid"/>
+            </view>
+            <view class="form-section">
+              <text>学校及专业</text>
+              <input name="school" maxlength="30" type="text" placeholder="School&Major" bindinput="getSchool"/>
+            </view>
+            <view class="form-section">
+              <text>感兴趣的职位(导演，编剧，摄影，后期，表演等)</text>
+              <textarea name="skill" maxlength="30" type="text" placeholder="Skills(Director, Writer, Camera, Post, Performance, etc.)" bindinput="getSkill"/>
+            </view>
+            <view class="form-section">
+              <text>自我介绍(过去作品，创作理念等)</text>
+              <textarea name="intro" maxlength="200" type="text" placeholder="Self-Introduction(Portfolio, Ideas, etc.)"  bindinput="getIntro"/>
+            </view>
+            <button formType="submit">Join FilMarathon</button>
+    </view>
+  </form>
 </view>

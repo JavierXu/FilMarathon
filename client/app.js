@@ -14,6 +14,17 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        if (res.code) {
+          // wx.request({
+          //   url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + config.appId + '&secret=' + config.appSecret + '&js_code=' + res.code + '& grant_type=authorization_code',
+          //   data: {
+          //     code: res.code
+          //   }
+          // })
+        }
+        else {
+          console.log('登录失败！' + res.errMsg)
+        }
       }
     })
     // 获取用户信息
@@ -39,5 +50,6 @@ App({
   },
   globalData: {
     userInfo: null,
+    openid: null,
   }
 })

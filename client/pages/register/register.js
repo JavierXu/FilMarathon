@@ -1,6 +1,5 @@
 // pages/register.js
 const app = getApp()
-var qcloud = require('../../vendor/wafer2-client-sdk/index')
 var config = require('../../config')
 
 Page({
@@ -8,7 +7,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userinfo:{}
+    userinfo:{},
+    name: {},
+    email: {},
+    wechatid: {},
+    school: {},
+    skill: {},
+    intro: {},
   },
 
   /**
@@ -23,36 +28,65 @@ Page({
     }
   },
 
+  getName: function(e) {
+    this.setData({
+      name: e.detail.value
+    });
+  },
+
+  getEmail: function(e) {
+    this.setData({
+      email: e.detail.value
+    });
+  },
+
+  getWechatid: function (e) {
+    this.setData({
+      wechatid: e.detail.value
+    });
+  },
+
+  getSchool: function(e) {
+    this.setData({
+      school: e.detail.value
+    });
+  },
+
+  getSkill: function (e) {
+    this.setData({
+      skill: e.detail.value
+    });
+  },
+
+  getIntro: function (e) {
+    this.setData({
+      intro: e.detail.value
+    });
+  },
+
   registerUser: function(e) {
-    console.log(e)
-
-    // 调用登录接口
-    qcloud.login({
-      success(result) {
-        if (result) {
-          console.log('登录成功')
-        } else {
-          // 如果不是首次登录，不会返回用户信息，请求用户信息接口获取
-          qcloud.request({
-            url: config.service.requestUrl,
-            login: true,
-            success(result) {
-              console.log('登录成功')
-            },
-
-            fail(error) {
-              console.log('request fail', error)
-            }
-          })
-        }
+    wx.request({
+      url: config.service.addUserUrl,
+      method: 'POST',
+      data: {
+        // TODO: openid, nickname
+        name: this.data.name,
+        email: this.data.email,
+        wechatid: this.data.wechatid,
+        school: this.data.school,
+        skill: this.data.skill,
+        intro: this.data.intro,
       },
-
-      fail(error) {
-        console.log('登录失败', error)
+      success: function (res) {
+        console.log(res.data)
       }
     })
 
     wx.setStorageSync('registered', true)
+
+    wx.navigateTo({
+      url: '../playground/playground',
+    })
   },
 
   /**
