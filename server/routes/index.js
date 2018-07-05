@@ -36,5 +36,6 @@ router.post('/message', controllers.message.post)
 router.post('/addUser', controllers.addUser)
 router.get('/getOpenid', controllers.getOpenid)
 router.get('/getAlluser', controllers.getAlluser)
+router.get('/getUser', controllers.getUser)
 
 module.exports = router

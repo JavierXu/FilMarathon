@@ -50,6 +50,5 @@ App({
   },
   globalData: {
     userInfo: null,
-    openid: null,
   }
 })

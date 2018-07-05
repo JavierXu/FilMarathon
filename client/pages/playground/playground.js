@@ -1,6 +1,6 @@
 // pages/register.js
 const app = getApp()
-var config = require('../../config')
+const config = require('../../config')
 
 Page({
   /**

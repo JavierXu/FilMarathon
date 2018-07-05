@@ -1,13 +1,13 @@
 // pages/register.js
 const app = getApp()
-var config = require('../../config')
+const config = require('../../config')
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    userinfo:{},
+    userInfo:{},
     name: {},
     email: {},
     wechatid: {},
@@ -70,6 +70,7 @@ Page({
       method: 'POST',
       data: {
         // TODO: openid, nickname
+        nickname: this.data.userInfo.nickName,
         name: this.data.name,
         email: this.data.email,
         wechatid: this.data.wechatid,
@@ -81,8 +82,6 @@ Page({
         console.log(res.data)
       }
     })
-
-    wx.setStorageSync('registered', true)
 
     wx.navigateTo({
       url: '../playground/playground',
