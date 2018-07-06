@@ -8,12 +8,12 @@ Page({
    */
   data: {
     userInfo:{},
-    name: {},
-    email: {},
-    wechatid: {},
-    school: {},
-    skill: {},
-    intro: {},
+    name: '',
+    email: '',
+    wechatid: '',
+    school: '',
+    skill: '',
+    intro: '',
   },
 
   /**
@@ -65,6 +65,17 @@ Page({
   },
 
   registerUser: function(e) {
+    var that = this;
+    var missInfo = !(that.data.name.replace(/\s/g, "") && this.data.email.replace(/\s/g, "") && this.data.wechatid.replace(/\s/g, "") && this.data.school.replace(/\s/g, "") && this.data.skill.replace(/\s/g, "") && this.data.intro.replace(/\s/g, ""));
+    
+    if (missInfo) {
+      wx.showToast({
+        title: '请填写完整信息！',
+        icon: 'none',
+      })
+      return false;
+    }
+
     wx.request({
       url: config.service.addUserUrl,
       method: 'POST',
@@ -80,12 +91,25 @@ Page({
       },
       success: function (res) {
         console.log(res.data)
+        if (res.data.code===-1) {
+          wx.showToast({
+            title: '注册失败！',
+            icon: 'none'
+          })
+        }
+        else {
+          wx.showToast({
+            title: '注册成功！',
+            icon: 'success'
+          })
+          wx.navigateTo({
+            url: '../playground/playground',
+          })
+        }
       }
     })
 
-    wx.navigateTo({
-      url: '../playground/playground',
-    })
+    
   },
 
   /**
