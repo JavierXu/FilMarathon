@@ -7,8 +7,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    color: 'gainsboro',
-    like_status: 'LIKE',
     user: [],
   },
 
@@ -21,26 +19,36 @@ Page({
       url: config.service.getAlluserUrl,
       method: 'GET',
       success: function (res) {
-        console.log(res.data.data)
+        // console.log(res.data.data)
+        var userData = res.data.data
+        for (var i=0; i<userData.length; i++) {
+          userData[i]['color'] = 'gainsboro'
+          userData[i]['like_status'] = 'LIKE'
+        }
         that.setData({
-          user: res.data.data
+          user: userData
         })
+        console.log(that.data.user)
       }
     })
   },
 
   likeUser: function(e) {
     console.log(e);
-    if (this.data.like_status==='LIKE') {
+    var index = e.currentTarget.dataset.index
+    var userData = this.data.user
+    if (userData[index]['like_status']==='LIKE') {
+      userData[index]['like_status'] = 'UNLIKE'
+      userData[index]['color'] = 'pink'
       this.setData({
-        color: 'pink',
-        like_status: 'UNLIKE'
+        user: userData
       })
     }
     else {
+      userData[index]['like_status'] = 'LIKE'
+      userData[index]['color'] = 'gainsboro'
       this.setData({
-        color: 'gainsboro',
-        like_status: 'LIKE'
+        user: userData
       })
     }
   },
