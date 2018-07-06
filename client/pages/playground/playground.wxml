@@ -1,9 +1,13 @@
 <!--pages/playground.wxml-->
 <view class="container">
-  <view class="user" wx:for="{{user}}">
-    <text>{{item.name}}\n</text>
-    <text>{{item.school}}\n</text>
-    <text>{{item.skill}}\n</text>
-    <text>{{item.introduction}}\n</text>    
+  <view class="user" wx:for="{{user}}"  style="background-color:{{color}}">
+    <view class="info">姓名：{{item.name}}</view>
+    <view class="info">学校及专业：{{item.school}}</view>
+    <view class="info">感兴趣的职位：{{item.skill}}</view>
+    <view class="info">自我介绍：{{item.introduction}}</view>
+    <view class="likeButton">
+      <button size='mini' bindtap='likeUser'>{{like_status}}</button>
+    </view>
+    
   </view>
 </view>

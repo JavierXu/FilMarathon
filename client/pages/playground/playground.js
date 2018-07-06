@@ -7,7 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user: []
+    color: 'gainsboro',
+    like_status: 'LIKE',
+    user: [],
   },
 
   /**
@@ -25,6 +27,22 @@ Page({
         })
       }
     })
+  },
+
+  likeUser: function(e) {
+    console.log(e);
+    if (this.data.like_status==='LIKE') {
+      this.setData({
+        color: 'pink',
+        like_status: 'UNLIKE'
+      })
+    }
+    else {
+      this.setData({
+        color: 'gainsboro',
+        like_status: 'LIKE'
+      })
+    }
   },
 
 
