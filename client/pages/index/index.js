@@ -116,6 +116,15 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
     })
+    
+    // DEBUG
+    wx.request({
+      url: 'https://ev0o1srm.qcloud.la/weapp/getOpenid',
+      success: function (res) {
+        console.log(res.data)
+      }
+    })
+
     // navigate to register/playground page
     wx.request({
       url: config.service.getUserUrl,

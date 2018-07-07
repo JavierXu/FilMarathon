@@ -8,6 +8,9 @@ const CONF = {
     // 微信小程序 App Secret
     appSecret: '0919cd49bd595536bf6d05cef99a696f',
 
+    // 推送消息模版ID
+    notificationId: 'XWJcVJtFnfrRLoslOF6HTQ1hdAOzj9h9nB5Ny_UEVLE',
+
     // 是否使用腾讯云代理登录小程序
     useQcloudLogin: true,
 
