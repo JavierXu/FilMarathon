@@ -3,41 +3,28 @@ const { appId } = require('../config')
 const { appSecret } = require('../config')
 const https = require('https')
 const request = require('request')
-
-const options = {
-  hostname: '208074655.filmarathon.xyz',
-  // port: 80,
-  path: '/weapp/getAlluser',
-  method: 'GET'
-};
+const Ut = require("../utils")
 
 module.exports = async ctx => {
   console.log('test')
-  request('https://www.baidu.com', function (error, response, body) {
-    console.log(response)
-    if (!error && response.statusCode == 200) {
-      console.log(body)
+  try {
+    let grant_type = 'authorization_code'
+    let code = ctx.query['code']
+    // console.log('req code: ', code);
+    let opts = {
+      url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + appId + '&secret=' + appSecret + '&js_code=' + code + '&grant_type=' + grant_type
     }
-    ctx.state.data = response
-  })
-  // var req = https.request(options, (res) => {
-  //   console.log('statusCode:', res.statusCode);
-  //   console.log('headers:', res.headers);
+    let r1 = await Ut.promiseReq(opts);
+    r1 = JSON.parse(r1);
+    console.log('r1 is:', r1);
+    openid = r1.openid
+    ctx.state.data = r1
+  }
+  catch (e) {
+    console.log(e);
+    ctx.response.status = 403
+  }
 
-  //   res.on('data', (d) => {
-  //     var str = ''
-  //     str += d
-  //     ctx.state.data = res.statusCode
-  //   });
-
-  //   // cts.state.data = res
-  //   req.on('error', (e) => {
-  //     console.error(e);
-  //     ctx.state.data = e
-  //   });
-  //   req.end();
-
-  // });
 
 
 }

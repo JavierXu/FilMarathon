@@ -10,12 +10,15 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+
   //事件处理函数
   bindViewTap: function() {
+
     wx.navigateTo({
       url: '../register/register'
     })
   },
+
   onLoad: function () {
     wx.clearStorageSync()
     if (app.globalData.userInfo) {
@@ -115,14 +118,6 @@ Page({
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
-    })
-    
-    // DEBUG
-    wx.request({
-      url: 'https://ev0o1srm.qcloud.la/weapp/getOpenid',
-      success: function (res) {
-        console.log(res.data)
-      }
     })
 
     // navigate to register/playground page

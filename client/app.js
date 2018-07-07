@@ -15,12 +15,15 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-          // wx.request({
-          //   url: 'https://api.weixin.qq.com/sns/jscode2session?appid=' + config.appId + '&secret=' + config.appSecret + '&js_code=' + res.code + '& grant_type=authorization_code',
-          //   data: {
-          //     code: res.code
-          //   }
-          // })
+          wx.request({
+            url: 'https://ev0o1srm.qcloud.la/weapp/getOpenid',
+            data: {
+              code: res.code
+            },
+            success: function (res) {
+              console.log(res.data)
+            }
+          })
         }
         else {
           console.log('登录失败！' + res.errMsg)
