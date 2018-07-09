@@ -10,18 +10,20 @@ App({
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
 
+    var that = this;
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           wx.request({
-            url: 'https://ev0o1srm.qcloud.la/weapp/getOpenid',
+            url: config.service.getOpenidUrl,
             data: {
               code: res.code
             },
             success: function (res) {
               console.log(res.data)
+              that.globalData.loginData = res.data.data
             }
           })
         }
@@ -51,7 +53,9 @@ App({
       }
     })
   },
+
   globalData: {
     userInfo: null,
+    loginData: null,
   }
 })

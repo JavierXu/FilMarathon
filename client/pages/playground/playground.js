@@ -36,21 +36,44 @@ Page({
   likeUser: function(e) {
     console.log(e);
     var index = e.currentTarget.dataset.index
+    var formId = e.detail.formId
     var userData = this.data.user
+    var that = this
     if (userData[index]['like_status']==='LIKE') {
-      userData[index]['like_status'] = 'UNLIKE'
-      userData[index]['color'] = 'pink'
-      this.setData({
-        user: userData
+      wx.showModal({
+        title: '提示',
+        content: '确认喜欢该用户后，该用户会获得你的微信号等信息',
+        success: function (res) {
+          if (res.confirm) {
+            userData[index]['like_status'] = 'LIKED'
+            userData[index]['color'] = 'pink'
+            that.setData({
+              user: userData,
+            })
+
+            // Request to send wechat-id info
+            wx.request({
+              url: config.service.sendLikeUrl,
+              method: 'POST',
+              data: {
+                user: userData[index],
+                formId: formId,
+              },
+              success: function (res) {
+                console.log(res.data)
+              }
+            })
+          }
+        }
       })
     }
-    else {
-      userData[index]['like_status'] = 'LIKE'
-      userData[index]['color'] = 'gainsboro'
-      this.setData({
-        user: userData
-      })
-    }
+    // else {
+    //   userData[index]['like_status'] = 'LIKE'
+    //   userData[index]['color'] = 'gainsboro'
+    //   this.setData({
+    //     user: userData
+    //   })
+    // }
   },
 
 

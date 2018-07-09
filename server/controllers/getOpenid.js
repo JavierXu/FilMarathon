@@ -1,4 +1,3 @@
-// TODO: GET openid from server side
 const { appId } = require('../config')
 const { appSecret } = require('../config')
 const https = require('https')

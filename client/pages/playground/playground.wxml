@@ -6,7 +6,9 @@
     <view class="info">感兴趣的职位：{{item.skill}}</view>
     <view class="info">自我介绍：{{item.introduction}}</view>
     <view class="likeButton">
-      <button size='mini' bindtap='likeUser' data-index='{{index}}'>{{item.like_status}}</button>
+      <form bindsubmit="likeUser" report-submit='true' class="likeButton" data-index='{{index}}'>
+      <button size='mini' formType='submit' >{{item.like_status}}</button>
+      </form>
     </view>
     
   </view>

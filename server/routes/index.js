@@ -37,5 +37,6 @@ router.post('/addUser', controllers.addUser)
 router.get('/getOpenid', controllers.getOpenid)
 router.get('/getAlluser', controllers.getAlluser)
 router.get('/getUser', controllers.getUser)
+router.post('/sendLike', controllers.sendLike)
 
 module.exports = router

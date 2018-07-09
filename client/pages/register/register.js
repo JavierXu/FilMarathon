@@ -80,7 +80,7 @@ Page({
       url: config.service.addUserUrl,
       method: 'POST',
       data: {
-        // TODO: openid, nickname
+        openid: app.globalData.loginData.openid,
         nickname: this.data.userInfo.nickName,
         name: this.data.name,
         email: this.data.email,

@@ -3,7 +3,8 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://ev0o1srm.qcloud.la';
+// var host = 'https://ev0o1srm.qcloud.la';
+var host = 'https://208074655.filmarathon.xyz';
 
 var config = {
 
@@ -31,6 +32,7 @@ var config = {
         getAlluserUrl: `${host}/weapp/getAlluser`,
         getUserUrl: `${host}/weapp/getUser`,
         getOpenidUrl: `${host}/weapp/getOpenid`,
+        sendLikeUrl: `${host}/weapp/sendLike`,
         
     }
 };
