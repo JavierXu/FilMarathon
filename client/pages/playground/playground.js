@@ -8,6 +8,7 @@ Page({
    */
   data: {
     user: [],
+    likedIds: ''
   },
 
   /**
@@ -15,22 +16,47 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+
+    // Get likedIds
     wx.request({
-      url: config.service.getAlluserUrl,
+      url: config.service.getUserUrl,
       method: 'GET',
+      data: {
+        nickname: app.globalData.userInfo.nickName,
+      },
       success: function (res) {
-        // console.log(res.data.data)
-        var userData = res.data.data
-        for (var i=0; i<userData.length; i++) {
-          userData[i]['color'] = 'gainsboro'
-          userData[i]['like_status'] = 'LIKE'
-        }
         that.setData({
-          user: userData
+          likedIds: res.data.data[0]['likedid'] 
         })
-        console.log(that.data.user)
+
+        wx.request({
+          url: config.service.getAlluserUrl,
+          method: 'GET',
+          success: function (res) {
+            // console.log(res.data.data)
+            var userData = res.data.data
+            for (var i = 0; i < userData.length; i++) {
+              // Already liked
+              if (that.data.likedIds.indexOf(userData[i].openid) != -1) {
+                userData[i]['color'] = 'pink'
+                userData[i]['like_status'] = 'LIKED'
+              }
+              else {
+                userData[i]['color'] = 'gainsboro'
+                userData[i]['like_status'] = 'LIKE'
+              }
+            }
+            that.setData({
+              user: userData
+            })
+            console.log(that.data.user)
+          }
+        })
+
       }
     })
+
+   
   },
 
   likeUser: function(e) {
@@ -39,7 +65,29 @@ Page({
     var formId = e.detail.formId
     var userData = this.data.user
     var that = this
+
+    // console.log(this.data.likedIds)
+
     if (userData[index]['like_status']==='LIKE') {
+
+      // Check if user has used 10 likes
+      if (this.data.likedIds.split(',') - 1 >= 10) {
+        wx.showToast({
+          icon: 'none',
+          title: '您已使用完10次LIKE！Good Luck!',
+        })
+        return -1
+      }
+
+      // Check if user likes itself
+      if (app.globalData.loginData.openid === userData[index]['openid']) {
+        wx.showToast({
+          icon: 'none',
+          title: '请将您宝贵的LIKE次数用于其他人吧！',
+        })
+        return -1
+      }
+
       wx.showModal({
         title: '提示',
         content: '确认喜欢该用户后，该用户会获得你的微信号等信息',
@@ -51,7 +99,20 @@ Page({
               user: userData,
             })
 
-            // Request to send wechat-id info
+            // Update liked_id
+            wx.request({
+              url: config.service.updateLikeUrl,
+              method: 'POST',
+              data: {
+                userId: app.globalData.loginData.openid,
+                likedId: userData[index]['openid'],
+              },
+              success: function (res) {
+                console.log(res.data)
+              }
+            })
+
+            // Request to send wechat_id info
             wx.request({
               url: config.service.sendLikeUrl,
               method: 'POST',

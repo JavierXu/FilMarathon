@@ -14,9 +14,9 @@ Page({
   //事件处理函数
   bindViewTap: function() {
     console.log(app.globalData)
-    wx.navigateTo({
-      url: '../register/register'
-    })
+    // wx.navigateTo({
+    //   url: '../register/register'
+    // })
   },
 
   onLoad: function () {

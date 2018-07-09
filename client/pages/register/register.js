@@ -68,46 +68,64 @@ Page({
     var that = this;
     var missInfo = !(that.data.name.replace(/\s/g, "") && this.data.email.replace(/\s/g, "") && this.data.wechatid.replace(/\s/g, "") && this.data.school.replace(/\s/g, "") && this.data.skill.replace(/\s/g, "") && this.data.intro.replace(/\s/g, ""));
     
+
     if (missInfo) {
       wx.showToast({
         title: '请填写完整信息！',
         icon: 'none',
       })
-      return false;
+      return -1
     }
 
-    wx.request({
-      url: config.service.addUserUrl,
-      method: 'POST',
-      data: {
-        openid: app.globalData.loginData.openid,
-        nickname: this.data.userInfo.nickName,
-        name: this.data.name,
-        email: this.data.email,
-        wechatid: this.data.wechatid,
-        school: this.data.school,
-        skill: this.data.skill,
-        intro: this.data.intro,
-      },
+    wx.showModal({
+      title: '提示',
+      content: '个人信息一经填写后，尚未开放修改功能，确认提交吗？',
       success: function (res) {
-        console.log(res.data)
-        if (res.data.code===-1) {
-          wx.showToast({
-            title: '注册失败！',
-            icon: 'none'
-          })
+        if (res.cancel) {
+          return -1
         }
         else {
-          wx.showToast({
-            title: '注册成功！',
-            icon: 'success'
+          
+          wx.request({
+            url: config.service.addUserUrl,
+            method: 'POST',
+            data: {
+              openid: app.globalData.loginData.openid,
+              nickname: that.data.userInfo.nickName,
+              name: that.data.name,
+              email: that.data.email,
+              wechatid: that.data.wechatid,
+              school: that.data.school,
+              skill: that.data.skill,
+              intro: that.data.intro,
+            },
+            success: function (res) {
+              console.log(res.data)
+              if (res.data.code === -1) {
+                wx.showToast({
+                  title: '注册失败！',
+                  icon: 'none'
+                })
+              }
+              else {
+                wx.showToast({
+                  title: '注册成功！',
+                  icon: 'success'
+                })
+                wx.navigateTo({
+                  url: '../playground/playground',
+                })
+              }
+            }
           })
-          wx.navigateTo({
-            url: '../playground/playground',
-          })
+
         }
       }
     })
+
+    
+
+   
 
     
   },

@@ -38,5 +38,6 @@ router.get('/getOpenid', controllers.getOpenid)
 router.get('/getAlluser', controllers.getAlluser)
 router.get('/getUser', controllers.getUser)
 router.post('/sendLike', controllers.sendLike)
+router.post('/updateLike', controllers.updateLike)
 
 module.exports = router
