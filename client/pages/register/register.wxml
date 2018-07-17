@@ -20,11 +20,11 @@
               <input name="school" maxlength="30" type="text" placeholder="School&Major" bindinput="getSchool"/>
             </view>
             <view class="form-section">
-              <text>感兴趣的职位(导演，编剧，摄影，后期，表演等)</text>
+              <text>感兴趣的职位（导演，编剧，摄影，后期，表演等）</text>
               <textarea name="skill" maxlength="30" type="text" placeholder="Skills(Director, Writer, Camera, Post, Performance, etc.)" bindinput="getSkill"/>
             </view>
             <view class="form-section">
-              <text>自我介绍(过去作品，创作理念等)</text>
+              <text>自我介绍（喜爱话题、创作理念、技能、过往经验、自定义标签等）</text>
               <textarea name="intro" maxlength="200" type="text" placeholder="Self-Introduction(Portfolio, Ideas, etc.)"  bindinput="getIntro"/>
             </view>
             <button formType="submit">Join FilMarathon</button>

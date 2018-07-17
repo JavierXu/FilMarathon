@@ -8,7 +8,9 @@ Page({
    */
   data: {
     user: [],
-    likedIds: ''
+    likeIds: '',
+    likedIds: '',
+    likedName: '',
   },
 
   /**
@@ -17,7 +19,7 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    // Get likedIds
+    // Get likeIds
     wx.request({
       url: config.service.getUserUrl,
       method: 'GET',
@@ -26,6 +28,7 @@ Page({
       },
       success: function (res) {
         that.setData({
+          likeIds: res.data.data[0]['likeid'],
           likedIds: res.data.data[0]['likedid'] 
         })
 
@@ -33,17 +36,30 @@ Page({
           url: config.service.getAlluserUrl,
           method: 'GET',
           success: function (res) {
-            // console.log(res.data.data)
             var userData = res.data.data
             for (var i = 0; i < userData.length; i++) {
               // Already liked
-              if (that.data.likedIds.indexOf(userData[i].openid) != -1) {
+              if (that.data.likeIds &&that.data.likeIds.indexOf(userData[i].openid) != -1) {
                 userData[i]['color'] = 'pink'
                 userData[i]['like_status'] = 'LIKED'
               }
               else {
                 userData[i]['color'] = 'gainsboro'
                 userData[i]['like_status'] = 'LIKE'
+                if (that.data.likedIds && that.data.likedIds.indexOf(userData[i].openid) != -1) {
+                  userData[i]['color'] = 'lightsalmon'
+                  var likedName = that.data.likedName
+                  if (!likedName) {
+                    that.setData({
+                      likedName: likedName + userData[i]['name']
+                    })
+                  }
+                  else {
+                    that.setData({
+                      likedName: likedName + '、' + userData[i]['name']
+                    })
+                  }
+                }
               }
             }
             that.setData({
@@ -66,12 +82,14 @@ Page({
     var userData = this.data.user
     var that = this
 
-    // console.log(this.data.likedIds)
-
-    if (userData[index]['like_status']==='LIKE') {
+    ///////////
+    // DEBUG //
+    ///////////
+    // if(true) {
+    if (userData[index]['like_status'] === 'LIKE') {
 
       // Check if user has used 10 likes
-      if (this.data.likedIds.split(',') - 1 >= 10) {
+      if (this.data.likeIds && this.data.likeIds.split(',').length - 1 >= 10) {
         wx.showToast({
           icon: 'none',
           title: '您已使用完10次LIKE！Good Luck!',
@@ -99,31 +117,46 @@ Page({
               user: userData,
             })
 
-            // Update liked_id
+            // Update like_id
             wx.request({
               url: config.service.updateLikeUrl,
               method: 'POST',
               data: {
                 userId: app.globalData.loginData.openid,
-                likedId: userData[index]['openid'],
+                likeId: userData[index]['openid'],
               },
               success: function (res) {
                 console.log(res.data)
+
+                // Check if they both liked each other
+                var otherLikeId = res.data.data.otherLikeId
+                if (!otherLikeId) {
+                  console.log("no match")
+                  return -1
+                }
+                if (otherLikeId && otherLikeId.indexOf(app.globalData.loginData.openid) === -1) {
+                  console.log("no match")
+                  return -1
+                }
+
+                // Request to send wechat_id info
+                wx.request({
+                  url: config.service.sendLikeUrl,
+                  method: 'POST',
+                  data: {
+                    user: userData[index],
+                    openid: app.globalData.loginData.openid,
+                    formId: formId,
+                  },
+                  success: function (res) {
+                    console.log(res.data)
+                  }
+                })
+
               }
             })
 
-            // Request to send wechat_id info
-            wx.request({
-              url: config.service.sendLikeUrl,
-              method: 'POST',
-              data: {
-                user: userData[index],
-                formId: formId,
-              },
-              success: function (res) {
-                console.log(res.data)
-              }
-            })
+            
           }
         }
       })

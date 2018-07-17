@@ -1,5 +1,9 @@
 <!--pages/playground.wxml-->
 <view class="container">
+  <view class="likedUser" wx:if="{{likedName}}">
+    {{likedName}} 为您点了Like，他们的Profile已在下方做高亮处理。当您为他们回点Like时，您将获得他们的微信号并做下一步交流。
+  </view>
+
   <view class="user" wx:for="{{user}}"  style="background-color:{{item.color}}">
     <view class="info">姓名：{{item.name}}</view>
     <view class="info">学校及专业：{{item.school}}</view>

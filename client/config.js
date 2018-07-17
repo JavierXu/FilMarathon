@@ -1,6 +1,6 @@
-/**
- * 小程序配置文件
- */
+ /**
+  * 小程序配置文件
+  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
 // var host = 'https://ev0o1srm.qcloud.la';
@@ -31,6 +31,7 @@ var config = {
 
         getAlluserUrl: `${host}/weapp/getAlluser`,
         getUserUrl: `${host}/weapp/getUser`,
+        getUserByOpenidUrl: `${host}/weapp/getUserByOpenid`,
         getOpenidUrl: `${host}/weapp/getOpenid`,
         sendLikeUrl: `${host}/weapp/sendLike`,
         updateLikeUrl: `${host}/weapp/updateLike`,

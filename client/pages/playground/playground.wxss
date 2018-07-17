@@ -5,6 +5,13 @@
   flex-direction: column;
 }
 
+.likedUser {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  width: 90%;
+}
+
 .user {
   /* background-color: gainsboro; */
   border: 5px;

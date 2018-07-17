@@ -8,7 +8,7 @@ const Ut = require("../utils")
 module.exports = async ctx => {
   const json = ctx.request.body
   var myDate = new Date()
-  var openid = json['user']['openid']
+  var openid = json['openid']
   var name = json['user']['name']
   var wechat_id = json['user']['wechat_id']
   var formId = json['formId']
