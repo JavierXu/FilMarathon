@@ -3,7 +3,9 @@
   */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
+// 测试用域名
 // var host = 'https://ev0o1srm.qcloud.la';
+// 正式域名
 var host = 'https://208074655.filmarathon.xyz';
 
 var config = {

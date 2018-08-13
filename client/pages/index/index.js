@@ -11,9 +11,9 @@ Page({
 
   bindViewTap: function() {
     console.log(app.globalData)
-    // wx.navigateTo({
-    //   url: '../register/register',
-    // })
+    wx.navigateTo({
+      url: '../register/register',
+    })
   },
 
   onLoad: function () {

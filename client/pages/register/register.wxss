@@ -17,6 +17,11 @@
    margin-bottom: 15px;
  }
 
+.form-section-intro {
+   margin-top: 5px;
+   margin-bottom: 150px;
+ }
+
 .register-section image, text, input, textarea {
   margin: 10px;
 }
