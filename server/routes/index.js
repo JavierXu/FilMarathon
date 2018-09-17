@@ -37,6 +37,7 @@ router.post('/addUser', controllers.addUser)
 router.get('/getOpenid', controllers.getOpenid)
 router.get('/getAlluser', controllers.getAlluser)
 router.get('/getUser', controllers.getUser)
+router.post('/searchUser', controllers.searchUser);
 router.get('/getUserByOpenid', controllers.getUserByOpenid)
 router.post('/sendLike', controllers.sendLike)
 router.post('/updateLike', controllers.updateLike)
