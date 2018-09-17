@@ -37,6 +37,7 @@ var config = {
         getOpenidUrl: `${host}/weapp/getOpenid`,
         sendLikeUrl: `${host}/weapp/sendLike`,
         updateLikeUrl: `${host}/weapp/updateLike`,
+        updateUserUrl: `${host}/weapp/updateUser`,
         
     }
 };

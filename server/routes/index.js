@@ -41,5 +41,6 @@ router.post('/searchUser', controllers.searchUser);
 router.get('/getUserByOpenid', controllers.getUserByOpenid)
 router.post('/sendLike', controllers.sendLike)
 router.post('/updateLike', controllers.updateLike)
+router.post('/updateUser', controllers.updateUser)
 
 module.exports = router

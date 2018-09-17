@@ -12,7 +12,7 @@ Page({
   bindViewTap: function() {
     console.log(app.globalData)
     wx.navigateTo({
-      url: '../register/register',
+      url: '../profile/profile',
     })
   },
 
