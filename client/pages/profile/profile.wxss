@@ -1,0 +1,33 @@
+/* pages/register.wxss */
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.register-section {
+  display: flex;
+  flex-direction: column;
+}
+
+ .form-section {
+   margin-top: 5px;
+   margin-bottom: 15px;
+ }
+
+.form-section-intro {
+   margin-top: 5px;
+   margin-bottom: 150px;
+ }
+
+.register-section image, text, input, textarea {
+  margin: 10px;
+}
+
+
+.register_section button {
+  margin-top: 100px;
+  border-radius: 5px;
+}
