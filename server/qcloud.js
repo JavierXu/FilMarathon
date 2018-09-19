@@ -33,4 +33,5 @@ const sdkConfig = (() => {
 
 // 初始化 SDK
 // 将基础配置和 sdk.config 合并传入 SDK 并导出初始化完成的 SDK
+console.log(Object.assign({}, sdkConfig, configs))
 module.exports = qcloud(Object.assign({}, sdkConfig, configs))
