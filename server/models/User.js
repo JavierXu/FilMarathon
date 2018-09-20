@@ -3,8 +3,8 @@ const sequelize = require('./sequelize')
 
 const User = sequelize.define('user', {
     openid: {
-        type: Sequelize.TEXT,
-        primaryKey: true
+        type: Sequelize.STRING(128),
+        allowNull: false
     },
     email: {
         type: Sequelize.TEXT,
@@ -16,18 +16,12 @@ const User = sequelize.define('user', {
         type: Sequelize.TEXT,
         defaultValue: '一只电影爱好者'
     },
-    likedid: {
-        type: Sequelize.STRING
-    },
-    likeid: {
-        type: Sequelize.TEXT
-    },
     name: {
         type: Sequelize.TEXT,
         allowNull: false
     },
     nickname: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING(32),
         allowNull: false,
         unique: true
     },
@@ -38,7 +32,7 @@ const User = sequelize.define('user', {
         type: Sequelize.TEXT
     },
     wechat_id: {
-        type: Sequelize.TEXT,
+        type: Sequelize.STRING(100),
         unique: true
     }
 })

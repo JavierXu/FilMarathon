@@ -2,30 +2,31 @@ const User = require('./User')
 const Like = require('./Like')
 const Project = require('./Project')
 const Position = require('./Position')
+const sequelize = require('./sequelize')
 
-User.hasMany(Like, {
+Like.belongsTo(User, {
     foreignKey: 'byUser',
     as: 'likesSent'
 })
 
-User.hasMany(Like, {
+Like.belongsTo(User, {
     foreignKey: 'toUser',
     as: 'likesReceived'
 })
 
-User.hasMany(Project, {
-    foreignKey: 'participants'
+Project.belongsToMany(User, {
+    through: 'ProjectParticipant'
 })
 
-Project.belongsTo(User, {
+Project.hasOne(User, {
     foreignKey: 'owner'
 })
 
-Project.hasMany(Position, {
-    as: 'vacancies'
-})
+Position.belongsTo(Project)
 
 Position.belongsTo(User)
+
+sequelize.sync()
 
 module.exports = {
     User,

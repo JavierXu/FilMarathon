@@ -12,7 +12,9 @@ const sequelize = new Sequelize(db, user, pass, {
         min: 0,
         acquire: 30000,
         idle: 10000,
-    }
+    },
+
+    logging: process.env.NODE_ENV === 'development'
 })
 
 module.exports = sequelize
