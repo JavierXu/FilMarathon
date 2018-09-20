@@ -1,7 +1,6 @@
-const { mysql } = require('../qcloud')
+const { User } = require('../models')
 
 module.exports = async ctx => {
-  const json = await mysql('filmarathon').select('*')
-  console.log(json)
+  const json = await User.findAll()
   ctx.state.data = json
 }

@@ -1,6 +1,7 @@
 const CONF = {
     port: process.env.PORT || '5757',
     rootPathname: process.env.ROOT_PATHNAME || '',
+    serverHost: process.env.SERVER_HOST || 'localhost',
 
     // 微信小程序 App ID
     appId: process.env.WX_APP_ID || 'wxb150fb1266bae15b',
@@ -42,7 +43,13 @@ const CONF = {
 
     // 微信登录态有效期
     wxLoginExpires: 7200,
-    wxMessageToken: process.env.WX_MSG_TOKEN || 'abcdefgh'
+    wxMessageToken: process.env.WX_MSG_TOKEN || 'abcdefgh',
+
+    tunnelServerUrl: process.env.TUNNEL_SERVER_URL,
+    tunnelSignatureKey: process.env.TUNNEL_SIG_KEY || 'abcdefgh',
+    qcloudAppId: process.env.QCLOUD_APP_ID,
+    qcloudSecretId: process.env.QCLOUD_SECRET_ID,
+    qcloudSecretKey: process.env.QCLOUD_SECRET_KEY,
 }
 
 module.exports = CONF
