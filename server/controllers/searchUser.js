@@ -8,16 +8,29 @@
  * @returns { users: [user] }
  */
 
-const { mysql } = require('../qcloud')
+const { User } = require('../models')
+const { Op } = require('sequelize')
 
 module.exports = async ctx => {
     const { keyword, filter = {} } = ctx.request.body;
 
-    const users = await mysql('filmarathon').where(builder => {
-        builder.where('nickname', 'like', `%${keyword}%`)
-            .orWhere('school', 'like', `%${keyword}%`)
-            .orWhere('introduction', 'like', `%${keyword}%`)
-    }).andWhere(filter).select('openid', 'nickname', 'school', 'introduction', 'skill')
+    if (!keyword) {
+        ctx.state.data = { users: [] }
+        return
+    }
+
+    const users = await User.findAll({
+        attributes: ['openid', 'nickname', 'school', 'introduction', 'skill'],
+        where: {
+            [Op.and]: [{
+                [Op.or]: [
+                    { nickname: { [Op.like]: keyword } },
+                    { school: { [Op.like]: keyword } },
+                    { introduction: { [Op.like]: keyword } }
+                ]
+            }, filter]
+        }
+    })
 
     ctx.state.data = { users }
 }
