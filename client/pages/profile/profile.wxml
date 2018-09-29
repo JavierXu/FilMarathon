@@ -27,6 +27,10 @@
               <text>自我介绍（喜爱话题、创作理念、技能、过往经验、自定义标签等）</text>
               <textarea name="intro" maxlength="400" type="text" placeholder="Self-Introduction(Portfolio, Ideas, etc.)"  bindinput="getIntro"/>
             </view>
+            <view class="form-section">
+              <text>相关作品</text>
+              <textarea name="videoproject" maxlength="100" type="url" placeholder="Video_URL"  bindinput="getVideo"/>
+            </view>
             <button formType="submit">确认修改</button>
     </view>
   </form>
